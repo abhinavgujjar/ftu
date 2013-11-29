@@ -16,7 +16,7 @@ namespace FTU.Entities
 
         public string FullName
         {
-            get { return FirstName + LastName; }
+            get { return (FirstName + " " + LastName).Trim(); }
         }
     }
 }
