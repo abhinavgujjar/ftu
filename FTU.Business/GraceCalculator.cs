@@ -13,5 +13,29 @@ namespace FTU.Business
         {
             throw new NotImplementedException();
         }
+
+        public int MaximumGracePerSubject
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public int MaximumTotalGraceMarks
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
