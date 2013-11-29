@@ -54,7 +54,8 @@ namespace FTU.Test
         {
         }
 
-        public void Test_All_Subject_Scores_More_than_50()
+        [TestMethod]
+        public void Test_All_Subject_Scores_More_than_PassingScore()
         {
             List<SubjectScore> scores = new List<SubjectScore>()
             {
@@ -73,12 +74,10 @@ namespace FTU.Test
             var revisedScores = _calculator.CalculateGrace(semScore);
 
             //assertion
-            var targetScore = revisedScores.Scores.Where(s => s.Subject == "Target");
-
-
-            Assert.AreEqual(50, targetScore);
-
-            
+            foreach (var revisedScore in revisedScores.Scores)
+            {
+                Assert.AreEqual(60, revisedScore.Score);
+            }
         }
 
         public void Test_Two_Subject_Scores_Are_48_Others_More_Than_50()

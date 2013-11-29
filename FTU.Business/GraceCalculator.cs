@@ -13,9 +13,9 @@ namespace FTU.Business
         {
             foreach (var score in basescore.Scores)
             {
-                if ((PassingScore - score.Score) <= MaximumGracePerSubject)
+                if ((score.Score < PassingScore ) && (PassingScore - score.Score) <= MaximumGracePerSubject)
                 {
-                    score.Score = 50;
+                    score.Score = PassingScore;
                 }
             }
             return basescore;
