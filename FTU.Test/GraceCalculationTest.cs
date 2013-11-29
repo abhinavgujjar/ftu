@@ -84,8 +84,30 @@ namespace FTU.Test
         {
         }
 
+        [TestMethod]
         public void Test_All_Are_48()
         {
+            List<SubjectScore> scores = new List<SubjectScore>()
+            {
+                new SubjectScore { Score = 48 },
+                new SubjectScore { Score = 48 },
+                new SubjectScore { Score = 48 },
+            };
+
+            SemesterScore semScore = new SemesterScore()
+            {
+                Scores = scores
+            };
+
+            //act
+
+            var revisedScores = _calculator.CalculateGrace(semScore);
+
+            //assertion
+            var numberOfPasses =
+                revisedScores.Scores.Where(r => r.Score >= 50).Count();
+            
+            Assert.AreEqual(2, numberOfPasses);
         }
 
         public void Test_All_Subject_Less_Than_48()
@@ -98,6 +120,61 @@ namespace FTU.Test
 
         public void Test_47_49_49()
         {
+            List<SubjectScore> scores = new List<SubjectScore>()
+            {
+                new SubjectScore { Score = 47 },
+                new SubjectScore { Score = 49 },
+                new SubjectScore { Score = 49 },
+            };
+
+            SemesterScore semScore = new SemesterScore()
+            {
+                Scores = scores
+            };
+
+            //act
+
+            var revisedScores = _calculator.CalculateGrace(semScore);
+
+            //assertion
+            var numberOfPasses =
+                revisedScores.Scores.Where(r => r.Score >= 50).Count();
+
+
+            var sameScore =
+                revisedScores.Scores.Where(r => r.Score == 47).Count();
+            
+            Assert.AreEqual(2, numberOfPasses);
+            Assert.AreEqual(1, numberOfPasses);
+
+        }
+
+        [TestMethod]
+        public void Test_48_48_49()
+        {
+            List<SubjectScore> scores = new List<SubjectScore>()
+            {
+                new SubjectScore { Score = 48 },
+                new SubjectScore { Score = 48 },
+                new SubjectScore { Score = 49 },
+            };
+
+            SemesterScore semScore = new SemesterScore()
+            {
+                Scores = scores
+            };
+
+            //act
+
+            var revisedScores = _calculator.CalculateGrace(semScore);
+
+            //assertion
+            var numberOfPasses =
+                revisedScores.Scores.Where(r => r.Score >= 50).Count();
+
+
+            Assert.AreEqual(3, numberOfPasses);
+
         }
 
     }

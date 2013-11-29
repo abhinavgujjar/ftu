@@ -11,11 +11,17 @@ namespace FTU.Business
     {
         public SemesterScore CalculateGrace(SemesterScore basescore)
         {
+            var totalGrace = 0;
             foreach (var score in basescore.Scores)
             {
-                if ((score.Score < PassingScore ) && (PassingScore - score.Score) <= MaximumGracePerSubject)
+                var margin = (PassingScore - score.Score);
+                if (totalGrace + margin <= MaximumTotalGraceMarks)
                 {
-                    score.Score = PassingScore;
+                    if ((score.Score < PassingScore) && margin <= MaximumGracePerSubject)
+                    {
+                        totalGrace += margin;
+                        score.Score = PassingScore;
+                    }
                 }
             }
             return basescore;

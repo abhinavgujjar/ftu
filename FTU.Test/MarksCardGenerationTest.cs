@@ -1,4 +1,5 @@
-﻿using FTU.DataAccess;
+﻿using FTU.Business;
+using FTU.DataAccess;
 using FTU.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -15,23 +16,12 @@ namespace FTU.Test
         [TestMethod]
         public void BasicTest()
         {
-            //IUniversityDataAccess dataAccess = null;
+            //arrange 
+            MarksCardGenerator gen = new MarksCardGenerator();
 
-            //IGraceCalculator graceCalc = new GraceCalculator();
-            //SemesterScore basescore = null;
-            //SemesterScore adjustedScore = graceCalc.CalculateGrace(basescore);
+            var marksCard = gen.GetMarksCard(30);
 
-
-            //IGradeCalculator calculator = new GradeCalculator();
-
-            //SemesterScore score = null;
-            //Grade grade = calculator.CalculateGrade(score);
-
-
-            //IMarksCardGenerator gen = new MarksCardGenerator(dataAccess, graceCalc, calculator);
-
-            //MarksCard card = gen.GetMarksCard(17);
-
+            
         }
     }
 }
