@@ -4,3 +4,6 @@ packages/
 *.csproj
 *.sln
 *.suo
+*.mdf
+*.ldf
+assemblyinfo.cs
