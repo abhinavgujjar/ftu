@@ -11,21 +11,36 @@ namespace FTU.Business
     {
         public Entities.MarksCard GetMarksCard(int studentId)
         {
-            var rawScores = DataAccess.GetStudentScore(studentId);
-
-            var adjustedScores = GraceCalculator.CalculateGrace(rawScores);
+            //Using Mock
+            var adjustedScores = GraceCalculator.CalculateGrace(null);
 
             var grade = GradeCalculator.CalculateGrade(adjustedScores);
 
+            var aggregateScore = AggregateScores(adjustedScores);
+
             MarksCard card = new MarksCard()
             {
-                StudentId = studentId
-                //AggregateScore = 
+                StudentId = studentId,
+                AggregateScore = aggregateScore,
+                GradeAwarded = grade
                 //Grade 
                 //Percentage Calculation
             };
 
             return card;
+        }
+
+        private static int AggregateScores(SemesterScore adjustedScores)
+        {
+            var aggregateScore = 0;
+            if (adjustedScores != null)
+            {
+                foreach (var subjectScore in adjustedScores.Scores)
+                {
+                    aggregateScore += subjectScore.Score;
+                }
+            }
+            return aggregateScore;
         }
 
         public IGraceCalculator GraceCalculator
