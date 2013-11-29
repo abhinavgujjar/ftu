@@ -13,5 +13,10 @@ namespace FTU.Entities
         public int YearOfJoining { get; set; }
         public string Department { get; set; }
         public int CollegeId { get; set; }
+
+        public string FullName
+        {
+            get { return FirstName + LastName; }
+        }
     }
 }
