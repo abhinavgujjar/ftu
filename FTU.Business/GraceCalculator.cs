@@ -11,31 +11,30 @@ namespace FTU.Business
     {
         public SemesterScore CalculateGrace(SemesterScore basescore)
         {
-            throw new NotImplementedException();
+            foreach (var score in basescore.Scores)
+            {
+                if ((PassingScore - score.Score) <= MaximumGracePerSubject)
+                {
+                    score.Score = 50;
+                }
+            }
+            return basescore;
         }
 
         public int MaximumGracePerSubject
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get ; set;
         }
 
         public int MaximumTotalGraceMarks
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get; set;
+        }
+
+        public int PassingScore
+        {
+            get;
+            set;
         }
     }
 }

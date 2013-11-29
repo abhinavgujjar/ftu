@@ -19,9 +19,11 @@ namespace FTU.Test
             _calculator = new GraceCalculator();
             _calculator.MaximumGracePerSubject = 2;
             _calculator.MaximumTotalGraceMarks = 5;
+            _calculator.PassingScore = 50;
 
         }
 
+        [TestMethod]
         public void Test_Any_One_Subject_Requires_Grace()
         {
             //arrange
@@ -43,8 +45,8 @@ namespace FTU.Test
             var revisedScores = _calculator.CalculateGrace(semScore);
 
             //assertion
-            var targetScore = revisedScores.Scores.Where(s => s.Subject == "Target");
-            Assert.AreEqual(50, targetScore);
+            var targetScore = revisedScores.Scores.Where(s => s.Subject == "Target").Single();
+            Assert.AreEqual(50, targetScore.Score);
 
         }
 
@@ -54,6 +56,29 @@ namespace FTU.Test
 
         public void Test_All_Subject_Scores_More_than_50()
         {
+            List<SubjectScore> scores = new List<SubjectScore>()
+            {
+                new SubjectScore { Score = 60 },
+                new SubjectScore { Score = 60 },
+                new SubjectScore { Score = 60 },
+            };
+
+            SemesterScore semScore = new SemesterScore()
+            {
+                Scores = scores
+            };
+
+            //act
+
+            var revisedScores = _calculator.CalculateGrace(semScore);
+
+            //assertion
+            var targetScore = revisedScores.Scores.Where(s => s.Subject == "Target");
+
+
+            Assert.AreEqual(50, targetScore);
+
+            
         }
 
         public void Test_Two_Subject_Scores_Are_48_Others_More_Than_50()
