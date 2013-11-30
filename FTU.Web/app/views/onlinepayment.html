@@ -1,0 +1,11 @@
+﻿<div class="row-fluid">
+    <input type="text" data-bind="value: Tax" />
+</div>
+<div class="row-fluid">
+    <div data-bind="foreach: Invoices">
+        <div class="span2" data-bind="text: invNumber"></div>
+        <div class="span3" data-bind="text: amount"></div>
+        <div class="span3"><a href="#" data-bind="click: $parent.selectInvoice">Select</a></div>
+    </div>
+
+</div>
