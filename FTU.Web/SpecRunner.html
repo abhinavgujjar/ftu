@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="Content/jasmine/jasmine.css">
+    <script type="text/javascript" src="/Scripts/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="/Scripts/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/Scripts/knockout-2.3.0.js"></script>
+    <script type="text/javascript" src="/Scripts/require.js"></script>
+    <script type="text/javascript">
+        require.config({
+            baseUrl: '/',
+            paths: {
+                'text': 'Scripts/text',
+                'durandal': 'Scripts/durandal',
+                'plugins': 'Scripts/durandal/plugins',
+                'transitions': 'Scripts/durandal/transitions',
+                'knockout': 'Scripts/knockout-2.3.0',
+                'bootstrap': 'Scripts/bootstrap',
+                'jquery': 'Scripts/jquery-1.9.1'
+            },
+        });
+        var runTests = function (specfiles) {
+            require(['Scripts/specs/welcomeSpec'], function () {
+                var htmlReporter = new jasmine.HtmlReporter();
+                jasmine.getEnv().addReporter(htmlReporter);
+                jasmine.getEnv().execute();
+            });
+        };
+
+        var currentWindowOnload = window.onload;
+
+        window.onload = function () {
+            if (currentWindowOnload) {
+                currentWindowOnload();
+            }
+            runTests();
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

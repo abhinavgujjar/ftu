@@ -14,5 +14,7 @@ namespace FTU.DataAccess
         List<SemesterScore> GetCollegeScores(int collegeId);
 
         List<int> GetColleges();
+
+        List<Student> GetStudents();
     }
 }
